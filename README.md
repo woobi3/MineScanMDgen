@@ -1,1 +1,2 @@
-# MScan
+# mcstats.net
+
