@@ -1,6 +1,5 @@
 #! /usr/bin/env python3
 
-from ensurepip import version
 import re
 from datetime import datetime
 
@@ -54,12 +53,14 @@ def verdata():
         return rd
     
 def motdf():
+    #find text: in minescan log and return it to list motd
+    motd = []
     with open("minescan.log") as f:
         lines = f.readlines()
-        filtered = [ x.strip() for x in lines if "motd" in x ]
-        for i, line in enumerate(filtered):
-            filtered[i] = line.split(";")[0]
-        return filtered
+        for i in lines:
+            if "text:" in i:
+                motd.append(i.split(":")[1])
+    
         
 
 dt = datetime.today().strftime("%I:%M%p %b %d %Y")
@@ -84,4 +85,3 @@ with open ("MSReport.md", "w") as report:
 ## $ Server list
 
 """)
-print(motdf())
