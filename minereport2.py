@@ -1,5 +1,5 @@
 from datetime import datetime
-from MDgen2 import ipfilter
+from minereport import ipfilter
 
 def data():
     ip = []

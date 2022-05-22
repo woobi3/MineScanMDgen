@@ -67,7 +67,7 @@ dt = datetime.today().strftime("%I:%M%p %b %d %Y")
 
 ips = ipfilter()
     
-with open ("MSReport.md", "w") as report:
+with open ("minereport.md", "w") as report:
         report.write(f"""# MineScan by lockness Ko and woobi3
 
 > {dt}
