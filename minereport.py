@@ -2,7 +2,7 @@
 
 import re
 from datetime import datetime
-
+#yes
 def ipfilter():
     with open("minescan.log") as f:
         lines = f.readlines()
