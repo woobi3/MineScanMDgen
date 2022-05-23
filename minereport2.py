@@ -93,9 +93,9 @@ for i, ip in enumerate(ips):
     
     IPINFO_TOKEN = os.getenv("IPINFO_TOKEN")
 
-    #ipinfo = requests.get(f"https://ipinfo.io/{ip}?token={IPINFO_TOKEN}").json()
+    ipinfo = requests.get(f"https://ipinfo.io/{ip}?token={IPINFO_TOKEN}").json()
 
-    ipinfo = {"city": "", "country": "", "region": "", "timezone": ""}
+    # ipinfo = {"city": "", "country": "", "region": "", "timezone": ""}
 
     city = ipinfo["city"]
     country = ipinfo["country"]

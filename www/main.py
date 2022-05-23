@@ -27,7 +27,7 @@ def css():
 
 @app.route('/random')
 def random():
-    server  = servers.aggregate([{ '$sample': { 'size': 1 } }])
+    server  = servers.aggregate([{ '$sample': { 'size': 1 }}])
     
     server  = list(server)[0]
 
@@ -35,6 +35,7 @@ def random():
     player_count = server['player_count']
     motd    = server['motd']
     loc     = server['location']
+    ver     = server['version']
 
     return f"""<!DOCTYPE html>
 <html>
@@ -51,6 +52,7 @@ def random():
             <div><b>{ip}</b> ; <span>{player_count}</span> players</div>
             <p>Message of the day: {motd}</p>
             <p>Located in: {loc}</p>
+            <p>Version: {ver}</p>
         </div>
     </body>
 </html>
