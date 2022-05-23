@@ -1,5 +1,4 @@
 from datetime import datetime
-from minereport import ipfilter
 import pymongo
 
 def data():
@@ -27,11 +26,31 @@ def ipfilter():
             filtered[i] = line.split(";")[0]
         return [ ip.rstrip() for ip in filtered ]
 
-def getMotd():
+def getMotd(ip):
     with open("minescan.log", "r") as f:
         lines = f.readlines()
         filtered = [ x.strip() for x in lines if "data" in x ]
         for i, line in enumerate(filtered):
+            ip_ = line.split(";")[0].rstrip()
+            if ip == ip_:
+                a = line.split(";")[1].lstrip()
+                try:
+                    return [ x.replace("(", "").replace(")", "") for x in a[12:-2].split("), (") ][0].split("text':")[1][2:-2]
+                except:
+                    return "A Minecraft Server"
+
+def getPlayerCount(ip):
+    with open("minescan.log", "r") as f:
+        lines = f.readlines()
+        filtered = [ x.strip() for x in lines if "data" in x ]
+        for i, line in enumerate(filtered):
+            ip_ = line.split(";")[0].rstrip()
+            if ip == ip_:
+                a = line.split(";")[1].lstrip()
+                try:
+                    return int([ x.replace("(", "").replace(")", "") for x in a[12:-2].split("), (") ][1].split("online':")[1].split(",")[0][1:])
+                except:
+                    return 0
 
 
 ips = ipfilter()
@@ -46,7 +65,9 @@ serversdb = db["servers"]
 servers = {}
 
 for i, ip in enumerate(ips):
-    servers[ip] = { motd: "message of the day", player_count: 0 }
+    servers[ip] = { 'motd': getMotd(ip), 'player_count': getPlayerCount(ip) }
+
+print(servers)
 
 with open("www/static/minereport.md", "w") as report:
     dt = datetime.today().strftime("%I:%M%p %b %d %Y")
