@@ -56,6 +56,8 @@ with open ("minereport.md", "w") as report:
 
 #### > 1.8: {len([i for i in version if "1.8" in i])}
 
+#### > 1.12.1: {len([i for i in version if "1.12.1" in i])}
+
 ## $ Server list:
 
 #### > 1.18.2:
