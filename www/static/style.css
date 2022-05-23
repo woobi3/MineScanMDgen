@@ -7,3 +7,14 @@ body {
     color: rgb(255, 255, 255);
 }
 
+a:visited {
+    color: azure;
+}
+
+h2 {
+    color: rgb(66, 212, 25);
+}
+
+h3 {
+    color: rgb(28, 30, 139);
+}
