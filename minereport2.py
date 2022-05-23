@@ -1,5 +1,6 @@
 from datetime import datetime
 from minereport import ipfilter
+import pymongo
 
 def data():
     ipversion = []
@@ -24,12 +25,30 @@ def ipfilter():
         filtered = [ x.strip() for x in lines if "data" in x ]
         for i, line in enumerate(filtered):
             filtered[i] = line.split(";")[0]
-        return filtered
+        return [ ip.rstrip() for ip in filtered ]
+
+def getMotd():
+    with open("minescan.log", "r") as f:
+        lines = f.readlines()
+        filtered = [ x.strip() for x in lines if "data" in x ]
+        for i, line in enumerate(filtered):
+
 
 ips = ipfilter()
 version = data()[1]
 
-with open ("minereport.md", "w") as report:
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+db = client["mcstats"]
+
+statsdb = db["stats"]
+serversdb = db["servers"]
+
+servers = {}
+
+for i, ip in enumerate(ips):
+    servers[ip] = { motd: "message of the day", player_count: 0 }
+
+with open("www/static/minereport.md", "w") as report:
     dt = datetime.today().strftime("%I:%M%p %b %d %Y")
 
     report.write(f"""# MineScan by lockness Ko and woobi3

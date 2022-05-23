@@ -11,5 +11,7 @@ We use
 - docker-compose for orchestration
 - mongodb for storing stats
 - flask as the backend framework
-- react as the frontend framework; and
-- masscan to scan the internet for servers
+- masscan to scan the internet for servers; and
+- python for generating reports
+
+
