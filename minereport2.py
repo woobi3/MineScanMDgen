@@ -56,18 +56,18 @@ def getPlayerCount(ip):
 ips = ipfilter()
 version = data()[1]
 
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb://root:password@localhost:27017/")
 db = client["mcstats"]
 
 statsdb = db["stats"]
 serversdb = db["servers"]
 
-servers = {}
+servers = []
 
 for i, ip in enumerate(ips):
-    servers[ip] = { 'motd': getMotd(ip), 'player_count': getPlayerCount(ip) }
+    servers.append({ 'ip': ip, 'motd': getMotd(ip), 'player_count': getPlayerCount(ip) })
 
-print(servers)
+serversdb.insert_many(servers)
 
 with open("www/static/minereport.md", "w") as report:
     dt = datetime.today().strftime("%I:%M%p %b %d %Y")
