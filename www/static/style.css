@@ -15,8 +15,9 @@ h2 {
     color: rgb(66, 215, 25);
 }
 
-h3 {
-    color: rgb(28, 30, 139);
+button {
+    background-color: rgba(85, 85, 85, 0);
+    margin-left: 5px;
 }
 
 
@@ -50,7 +51,7 @@ h3 {
     visibility: hidden;
     width: 140px;
     background-color: #555;
-    color: #fff;
+    color: rgb(0, 0, 0);
     text-align: center;
     border-radius: 6px;
     padding: 5px;

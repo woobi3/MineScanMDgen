@@ -54,8 +54,6 @@ def random():
             <p>Located in: {loc}</p>
             <p>Version: {ver}</p>
         </div>
-        <input type="text" value={ip} id="ip">
-        <button onclick="copy()">Copy text</button>
     </body>
 </html>
 """
