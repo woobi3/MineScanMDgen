@@ -62,7 +62,7 @@ def getPlayerCount(ip):
                     return 0
 
 def getVersion(ip):
-    print("[INFO] Getting version info for {ip}")
+    print(f"[INFO] Getting version info for {ip}")
     with open("minescan.log", "r") as f:
         lines = f.readlines()
         filtered = [ x.strip() for x in lines if "data" in x ]
