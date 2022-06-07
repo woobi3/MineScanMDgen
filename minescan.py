@@ -27,9 +27,9 @@ class PingFactory(ClientFactory):
     protocol_mode_next = "status"
 
 class MassScan:
-    def __init__(self, subnet, rate=1000):
+    def __init__(self, subnet, rate=2000):
         #sudo masscan -p25565 0.0.0.0/0 --exclude 1.1.1.1 --rate=10000
-        self.command = ["bash", "-c", f"sudo masscan -p25565 {subnet} --exclude 0.0.0.0 --rate={rate} 2>/dev/null"]
+        self.command = ["bash", "-c", f"proxychains sudo masscan -p25565 {subnet} --exclude 0.0.0.0 --rate={rate} 2>/dev/null"]
     
     def scan(self, cb):
         with subprocess.Popen(self.command, stdout=subprocess.PIPE) as proc:
