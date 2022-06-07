@@ -5,7 +5,7 @@ services:
     build: ./www
     restart: unless-stopped
     ports:
-      - 80:5000
+      - 81:5000
 
   mongo:
     image: mongo
