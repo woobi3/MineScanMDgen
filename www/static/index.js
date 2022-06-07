@@ -24,10 +24,11 @@ function graph() {
   };
   let sotdata = [sot];
   let sotlayout = {
-  colorway:[ '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff']  
+  colorway:['#ff0000'],
+  paper_bgcolor: ["#FFF3"],
   }
 
-  Plotly.newPlot('sot', sotdata);
+  Plotly.newPlot('sot', sotdata, sotlayout);
 }
 
 
