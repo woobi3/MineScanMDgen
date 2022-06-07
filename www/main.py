@@ -1,7 +1,9 @@
 from flask import Flask, render_template, Response
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import pymongo
 
-client  = pymongo.MongoClient("mongodb://root:password@localhost:27017/")
+client  = pymongo.MongoClient("mongodb://root:password@mongo:27017/")
 
 db      = client["mcstats"]
 
@@ -12,6 +14,12 @@ style   = open("static/style.css", "r").read()
 javascript = open("static/index.js", "r").read()
 
 app     = Flask(__name__)
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["1000 per hour"]
+)
 
 @app.route('/')
 def index():
@@ -26,6 +34,7 @@ def css():
     return Response(style, mimetype='text/css')
 
 @app.route('/random')
+@limiter.limit("10 per minute")
 def random():
     server  = servers.aggregate([{ '$sample': { 'size': 1 }}])
     
@@ -53,6 +62,9 @@ def random():
             <p>Message of the day: {motd}</p>
             <p>Located in: {loc}</p>
             <p>Version: {ver}</p>
+            <button>
+                <a href="/random">Reload</a>
+            </button>
         </div>
     </body>
 </html>
