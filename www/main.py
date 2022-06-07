@@ -23,7 +23,7 @@ limiter = Limiter(
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", stats=1)
 
 @app.route('/js')
 def js():
@@ -32,6 +32,10 @@ def js():
 @app.route('/css')
 def css():
     return Response(style, mimetype='text/css')
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 @app.route('/random')
 @limiter.limit("10 per minute")
