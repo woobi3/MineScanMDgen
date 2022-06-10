@@ -3,7 +3,6 @@ minereport.md
 .DS_Store
 
 .env
-venv/
 
 *.pyc
 __pycache__/
