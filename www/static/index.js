@@ -21,13 +21,17 @@ function graph() {
   let sot = {
     y: x,
     type: 'bar',
+    name: 'servers over time',
   };
   let sotdata = [sot];
+
   let sotlayout = {
-  colorway:[ '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff']  
+    plot_bgcolor: "rgb(0,0,0)",
+    paper_bgcolor: "rgb(0,0,0)",
+    showbackground: true,
   }
 
-  Plotly.newPlot('sot', sotdata);
+  Plotly.newPlot('sot', sotdata, sotlayout, {staticPlot: true});
 }
 
 
